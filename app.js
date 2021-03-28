@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const dbConfig = require("../config/db.config.js");
+const dbConfig = require("./api/config/db.config.js");
 mongoose
   .connect(dbConfig.url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
