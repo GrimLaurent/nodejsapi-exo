@@ -17,7 +17,7 @@ app.listen(PORT, () => {
 
 const db = require("./api/models");
 db.mongoose
-  .connect(db.url, {
+  .connect(db.url, cors(corsOptions), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
