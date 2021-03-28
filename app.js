@@ -30,6 +30,7 @@ app.post("/api/stuff", (req, res, next) => {
   const thing = new Thing({
     ...req.body,
   });
+  console.log(req.body);
   thing
     .save()
     .then(() => res.status(201).json({ message: "Objet enregistré !" }))
