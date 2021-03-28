@@ -8,7 +8,7 @@ var corsOptions = {
   origin: "http://51.75.202.45:8081",
 };
 
-require("./app/routes/turorial.routes")(app);
+require("./api/routes/turorial.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
