@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-const Thing = require("./models/thing");
+const Thing = require("./api/models/thing");
 
 app.post("/api/stuff", (req, res, next) => {
   delete req.body._id;
