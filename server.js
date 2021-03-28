@@ -1,6 +1,7 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+//const bodyParser = require("body-parser");
+//const cors = require("cors");
+const http = require("http");
 
 const app = express();
 
@@ -17,16 +18,40 @@ app.use((req, res, next) => {
   next();
 });
 
-var corsOptions = {
-  origin: "http://localhost:8080",
-};
+app.use((req, res, next) => {
+  console.log("Requête reçue !");
+  next();
+});
+
+app.use((req, res, next) => {
+  res.status(201);
+  next();
+});
+
+app.use((req, res, next) => {
+  res.json({ message: "Votre requête a bien été reçue !" });
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log("Réponse envoyée avec succès !");
+});
+
+//var corsOptions = {
+//  origin: "http://localhost:8080",
+//};
+
+app.set("port", process.env.PORT || 3000);
+const server = http.createServer(app);
+
+server.listen(process.env.PORT || 3000);
 
 require("./api/routes/turorial.routes")(app);
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+//const PORT = process.env.PORT || 8080;
+//app.listen(PORT, () => {
+//  console.log(`Server is running on port ${PORT}.`);
+//});
 
 const db = require("./api/models");
 db.mongoose
