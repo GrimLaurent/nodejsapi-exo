@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-//const cors = require("cors");
+const cors = require("cors");
 const http = require("http");
 
 const app = express();
@@ -40,6 +40,8 @@ app.use((req, res, next) => {
 //var corsOptions = {
 //  origin: "http://localhost:8080",
 //};
+
+app.use(cors());
 
 app.set("port", process.env.PORT || 3000);
 const server = http.createServer(app);
