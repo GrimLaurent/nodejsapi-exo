@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-//const cors = require("cors");
+const cors = require("cors");
 
 const app = express();
 
@@ -17,9 +17,9 @@ app.use((req, res, next) => {
   next();
 });
 
-//var corsOptions = {
-//  origin: "http://51.75.202.45:8081",
-//};
+var corsOptions = {
+  origin: "http://localhost:8080",
+};
 
 require("./api/routes/turorial.routes")(app);
 // set port, listen for requests
