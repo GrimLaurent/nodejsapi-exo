@@ -1,3 +1,3 @@
 module.exports = {
-  url: "mongodb://localhost:27017/bezkoder_db",
+  url: "mongodb://nicolaide:Guildwars2@51.75.202.45:27017/admin",
 };
