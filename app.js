@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+var cors = require("cors");
 
 const dbConfig = require("./api/config/db.config.js");
 mongoose
@@ -10,48 +11,48 @@ mongoose
 
 const app = express();
 app.use((req, res, next) => {
-  if (($request_method = "OPTIONS")) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  //  if (($request_method = "OPTIONS")) {
+  //    res.setHeader("Access-Control-Allow-Origin", "*");
+  //    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 
-    // Custom headers and headers various browsers *should* be OK with but aren't
+  //    // Custom headers and headers various browsers *should* be OK with but aren't
 
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
-    );
+  //    res.setHeader(
+  //      "Access-Control-Allow-Headers",
+  //      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+  //    );
 
-    // Tell client that this pre-flight info is valid for 20 days
+  //    // Tell client that this pre-flight info is valid for 20 days
 
-    res.setHeader("Access-Control-Max-Age", 1728000);
-    res.setHeader("Content-Type", "text/plain; charset=utf-8");
-    res.setHeader("Content-Length", 0);
-    return 204;
-  }
-  if (($request_method = "POST")) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
-    );
-    res.setHeader(
-      "Access-Control-Expose-Headers",
-      "Content-Length,Content-Range"
-    );
-  }
-  if (($request_method = "GET")) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
-    );
-    res.setHeader(
-      "Access-Control-Expose-Headers",
-      "Content-Length,Content-Range"
-    );
-  }
+  //    res.setHeader("Access-Control-Max-Age", 1728000);
+  //    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  //    res.setHeader("Content-Length", 0);
+  //    return 204;
+  //  }
+  //  if (($request_method = "POST")) {
+  //    res.setHeader("Access-Control-Allow-Origin", "*");
+  //    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  //    res.setHeader(
+  //      "Access-Control-Allow-Headers",
+  //      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+  //    );
+  //    res.setHeader(
+  //      "Access-Control-Expose-Headers",
+  //      "Content-Length,Content-Range"
+  //    );
+  //  }
+  //  if (($request_method = "GET")) {
+  //    res.setHeader("Access-Control-Allow-Origin", "*");
+  //    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  //    res.setHeader(
+  //      "Access-Control-Allow-Headers",
+  //      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+  //    );
+  //    res.setHeader(
+  //      "Access-Control-Expose-Headers",
+  //      "Content-Length,Content-Range"
+  //    );
+  //  }
   //  res.setHeader("Access-Control-Allow-Origin", "*");
   //  res.setHeader(
   //    "Access-Control-Allow-Headers",
@@ -61,6 +62,16 @@ app.use((req, res, next) => {
   //    "Access-Control-Allow-Methods",
   //    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
   //  );
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8888");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 app.use(express.json());
