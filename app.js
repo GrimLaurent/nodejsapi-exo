@@ -24,6 +24,9 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 const Thing = require("./api/models/thing");
+const Hero = require("./api/models/hero");
+
+require("./api/routes/hero.routes")(app);
 
 app.post("/api/stuff", (req, res, next) => {
   delete req.body._id;
