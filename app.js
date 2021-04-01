@@ -115,6 +115,6 @@ app.use("/api/stuff", (req, res, next) => {
   res.status(200).json(stuff);
 });
 
-require("./api/routes/hero.routes")(app);
+//require("./api/routes/hero.routes")(app);
 
 module.exports = app;
