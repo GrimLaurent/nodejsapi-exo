@@ -10,15 +10,57 @@ mongoose
 
 const app = express();
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
+  if (($request_method = "OPTIONS")) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+
+    // Custom headers and headers various browsers *should* be OK with but aren't
+
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+    );
+
+    // Tell client that this pre-flight info is valid for 20 days
+
+    res.setHeader("Access-Control-Max-Age", 1728000);
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Content-Length", 0);
+    return 204;
+  }
+  if (($request_method = "POST")) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+    );
+    res.setHeader(
+      "Access-Control-Expose-Headers",
+      "Content-Length,Content-Range"
+    );
+  }
+  if (($request_method = "GET")) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+    );
+    res.setHeader(
+      "Access-Control-Expose-Headers",
+      "Content-Length,Content-Range"
+    );
+  }
+  //  res.setHeader("Access-Control-Allow-Origin", "*");
+  //  res.setHeader(
+  //    "Access-Control-Allow-Headers",
+  //    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  //  );
+  //  res.setHeader(
+  //    "Access-Control-Allow-Methods",
+  //    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  //  );
   next();
 });
 app.use(express.json());
